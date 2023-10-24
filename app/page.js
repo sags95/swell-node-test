@@ -1,6 +1,15 @@
-import Image from 'next/image'
+import Image from 'next/image';
+const swell = require('swell-node').init(process.env.SWELL_STORE_ID, process.env.SWELL_SECRET_KEY);
 
-export default function Home() {
+
+async function getProducts(){
+  const res = await swell.get('/products');
+  console.log(res.results);
+}
+
+export default async function Home() {
+  const data = await getProducts();
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
